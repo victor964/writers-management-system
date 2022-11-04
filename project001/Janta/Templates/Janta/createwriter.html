@@ -1,0 +1,16 @@
+{% extends 'admin/main.html' %}
+
+{% block content %}
+
+<main style="margin-top: 58px">
+    <div class="container pt-4">
+        <h1>Add Writer</h1>
+        <form method="POST">
+            {% csrf_token %}
+            {{form.as_p}}
+            <button type="submit" class="btn btn-outline-primary" data-mdb-ripple-color="dark">Save</button>
+        </form>
+    </div>
+</main>
+
+{% endblock %}

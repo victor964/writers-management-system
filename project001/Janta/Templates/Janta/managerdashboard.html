@@ -1,0 +1,96 @@
+{% extends 'janta/main.html' %}
+
+{% block content %}
+
+{% include 'janta/navbar.html' %}
+
+<div class="container pt-4">
+    <div class="row">
+        <div class="col-sm-5 col-md-6">
+            <div class="card">
+              <div class="card-body">
+                <div class="d-flex justify-content-between px-md-1">
+                  <div>
+                    <h3 class="text-success">{{total_writers}}</h3>
+                    <p class="mb-0">Writers</p>
+                  </div>
+                  <div class="align-self-center">
+                    <i class="fas fa-users text-success fa-3x"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        <div class="col-sm-5 offset-sm-2 col-md-6 offset-md-0">
+          <div class="card">
+            <div class="card-body">
+              <div class="d-flex justify-content-between px-md-1">
+                <div>
+                  <h3 class="text-danger">{{total_orders}}</h3>
+                  <p class="mb-0">Orders Assigned</p>
+                </div>
+                <div class="align-self-center">
+                  <i class="fas fa-briefcase text-danger fa-3x"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+</div>
+
+<div class="container pt-4">
+    <div class="row">
+        <div class="card-header py-3">
+            <a
+            href="{% url 'add_order' %}"
+            class="btn btn-primary btn-rounded"
+            ><i class="fas fa-plus fa-fw me-3"></i><span>Add Order</span></a>
+        </div>
+        <div class="card-header text-center py-3">
+            <h5 class="mb-0 text-center">
+              <strong>Assigned Orders</strong>
+            </h5>
+        </div>
+        <table class="table table-sm">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Writer Name</th>
+                <th scope="col">Phone No.</th>
+                <th scope="col">Order ID</th>
+                <th scope="col">CPP</th>
+                <th scope="col">Date Assigned</th>
+                <th scope="col">Assignee</th>
+                <th scope="col">Re-assign</th>
+                <th scope="col">Delete</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for order in orders %}
+                <tr>
+                    <th scope="row">{{order.id}}</th>
+                    <td>{{order.writer.Full_Names}}</td>
+                    <td>{{order.writer.Phone_no}}</td>
+                    <td>{{order.order_id}}</td>
+                    <td>{{order.cpp}}</td>
+                    <td>{{order.date_created}}</td>
+                    <td>{{order.manager.user}}</td>
+                    <td>
+                        <a href="{% url 'edit_order' order.id %}">
+                        <button type="button" class="btn btn-outline-warning btn-sm btn-rounded" data-mdb-ripple-color="dark">Edit</button>
+                        </a>
+                    </td>
+                    <td>
+                        <a href="{% url 'delete_order' order.id %}">
+                        <button type="button" class="btn btn-outline-danger btn-sm btn-rounded" data-mdb-ripple-color="dark">Delete</button>
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+          </table>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,67 @@
+{% extends 'janta/main.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<div class="container pt-4">
+    <div class="row">
+        <div class="container-sm">
+          <div class="card">
+            <div class="card-header text-center py-3">
+                <h5 class="mb-0 text-center">
+                  <strong>All Writers</strong>
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover text-nowrap">
+                      <thead>
+                        <tr>
+                          <th scope="col">Name</th>
+                          <th scope="col">Phone No.</th>
+                          <th scope="col">Email</th>
+                          <th scope="col">Gender</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for writer in writers %}
+                        <tr>
+                          <td>{{writer.Full_Names}}</td>
+                          <td>{{writer.Phone_no}}</td>
+                          <td>{{writer.Email}}</td>
+                          <td>{{writer.Gender}}</td>
+                        </tr>
+                        {% endfor %}
+                      </tbody>
+                    </table>
+                  </div>
+            </div>
+          </div>
+        </div>
+    </div>
+    <h1>Add Order</h1>
+    <div class="row">
+        <div class="container-sm">
+          <div class="card">
+            <div class="card-body">
+              <div class="d-flex justify-content-between px-md-1">
+                <div>
+                    <form action="" method="POST" class="form-inline">
+                      <div class="md-form">
+                        {% csrf_token %}
+                        {{form|crispy}}
+                        <button type="submit" class="btn btn-outline-primary" data-mdb-ripple-color="dark">Save</button>
+                      </div>
+                    </form>
+                    
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

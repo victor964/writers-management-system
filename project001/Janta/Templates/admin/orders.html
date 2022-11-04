@@ -1,0 +1,80 @@
+{% extends 'admin/main.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<main style="margin-top: 58px">
+  <div class="container pt-4">
+    <h5>Filter Orders</h5>
+    <div class="row">
+        <div class="container-sm">
+          <div class="card bg-info bg-gradient text-dark">
+            <div class="card-body">
+              <div class="d-flex justify-content-between px-md-1">
+                <div>
+                    <form action="" method="GET" class="form-inline">
+                      <div class="md-form">
+                        {{myfilter.form}}
+                        <button type="submit" class="btn btn-outline-primary" data-mdb-ripple-color="dark">Filter</button>
+                      </div>
+                    </form>
+                    
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="container-sm">
+          <div class="card">
+            <div class="card-header text-center py-3">
+                <h1 class="mb-0">
+                  <strong>All Orders</strong>
+                </h1>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover text-nowrap">
+                      <thead>
+                        <tr>
+                            <th scope="col">Order ID.</th>
+                            <th scope="col">Order Cpp</th>
+                            <th scope="col">Order Pages</th>  
+                            <th scope="col">Name</th>
+                            <th scope="col">Phone No.</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Assignee</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for order in orders %}
+                        <tr>
+                            <td>{{order.order_id}}</td>
+                            <td>{{order.cpp}}</td>
+                            <td>{{order.pages}}</td>
+                            <td>{{order.writer.Full_Names}}</td>
+                            <td>{{order.writer.Phone_no}}</td>
+                            <td>{{order.writer.Email}}</td>
+                            <td>{{order.manager.Full_Names}}</td>
+                        </tr>
+                        {% endfor %}
+                      </tbody>
+                    </table>
+                  </div>
+            </div>
+          </div>
+        </div>
+    </div>
+    <a href="{% url 'export_csv' %}">
+        <button type="submit" class="btn btn-primary">Export csv</button>
+    </a>
+    <a href="#">
+        <button type="submit" class="btn btn-primary">Send Email</button>
+    </a>
+</div>
+</main>
+
+{% endblock %}

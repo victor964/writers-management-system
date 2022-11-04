@@ -1,0 +1,147 @@
+{% extends 'admin/main.html' %}
+
+{% block content %}
+
+<main style="margin-top: 58px">
+    <div class="container pt-4">
+      <div class="row">
+        <div class="col-xl-4 col-sm-6 col-12 mb-4">
+          <div class="card">
+            <div class="card-body">
+              <div class="d-flex justify-content-between px-md-1">
+                <div>
+                  <h3 class="text-danger">{{total_managers}}</h3>
+                  <p class="mb-0">Managers</p>
+                </div>
+                <div class="align-self-center">
+                  <i class="far fa-user text-danger fa-3x"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-4 col-sm-6 col-12 mb-4">
+          <div class="card">
+            <div class="card-body">
+              <div class="d-flex justify-content-between px-md-1">
+                <div>
+                  <h3 class="text-success">{{total_writers}}</h3>
+                  <p class="mb-0">Writers</p>
+                </div>
+                <div class="align-self-center">
+                  <i class="fas fa-users text-success fa-3x"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-4 col-sm-6 col-12 mb-4">
+          <div class="card">
+            <div class="card-body">
+              <div class="d-flex justify-content-between px-md-1">
+                <div>
+                  <h3 class="text-warning">{{total_orders}}</h3>
+                  <p class="mb-0">Orders</p>
+                </div>
+                <div class="align-self-center">
+                  <i class="fas fa-chart-bar text-warning fa-3x"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <!--Section: All Managers-->
+      <section class="mb-4">
+        <div class="card">
+          <div class="card-header text-center py-3">
+            <h5 class="mb-0 text-center">
+              <strong>My Managers</strong>
+            </h5>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-hover text-nowrap">
+                <thead>
+                  <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Phone No.</th>
+                    <th scope="col">Edit</th>
+                    <th scope="col">Delete</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for manager in managers %}
+                  <tr>
+                    <td>{{manager.Full_Names}}</td>
+                    <td>{{manager.Phone_no}}</td>
+                    <td>
+                      <a href="{% url 'update_managers' manager.id %}">
+                        <button type="button" class="btn btn-outline-warning btn-sm btn-rounded" data-mdb-ripple-color="dark">Edit</button>
+                      </a>
+                    </td>
+                    <td>
+                      <a href="{% url 'delete_managers' manager.id %}">
+                        <button type="button" class="btn btn-outline-danger btn-sm btn-rounded" data-mdb-ripple-color="dark">Delete</button>
+                      </a>
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!--Section: All Managers-->
+
+      <!--Section: All Writers-->
+      <section class="mb-4">
+        <div class="card">
+          <div class="card-header text-center py-3">
+            <h5 class="mb-0 text-center">
+              <strong>My Writers</strong>
+            </h5>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-hover text-nowrap">
+                <thead>
+                  <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Phone No.</th>
+                    <th scope="col">Edit</th>
+                    <th scope="col">Delete</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for writer in writers %}
+                  <tr>
+                    <td>{{writer.Full_Names}}</td>
+                    <td>{{writer.Phone_no}}</td>
+                    <td>
+                      <a href="{% url 'update_writers' writer.id %}">
+                        <button type="button" class="btn btn-outline-warning btn-sm btn-rounded" data-mdb-ripple-color="dark">Edit</button>
+                      </a>
+                    </td>
+                    <td>
+                      <a href="{% url 'delete_writers' writer.id %}">
+                        <button type="button" class="btn btn-outline-danger btn-sm btn-rounded" data-mdb-ripple-color="dark">Delete</button>
+                      </a>
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!--Section: All Writers-->
+  
+
+    </div>
+  </main>
+
+{% endblock %}
